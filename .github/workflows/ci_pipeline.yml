@@ -1,4 +1,4 @@
-name: Microservices CI Pipeline
+ame: Microservices CI Pipeline
 
 # 1. Триггер: Запускать на любой Push в ветку main или master
 on:
@@ -42,3 +42,10 @@ jobs:
         # Указываем python path, чтобы тесты видели папки сервисов
         export PYTHONPATH=$PYTHONPATH:.
         pytest
+
+    - name: Lint YAML files
+      # Мы используем готовый Action из магазина GitHub
+      uses: ibiqlik/action-yamllint@v3
+      with:
+        # Указываем, какие файлы проверять (все .yml и .yaml)
+        file_extensions: 'yml,yaml'
