@@ -1,4 +1,4 @@
-ame: Microservices CI Pipeline
+name: Microservices CI Pipeline
 
 # 1. Триггер: Запускать на любой Push в ветку main или master
 on:
@@ -27,13 +27,23 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        # Проверяем существование requirements.txt
+        if [ -f requirements.txt ]; then
+          echo "Installing dependencies from requirements.txt..."
+          pip install -r requirements.txt
+        else
+          echo "requirements.txt not found, installing minimal dependencies..."
+          # Устанавливаем только необходимые для тестов и линтинга
+          pip install pytest flake8
+        fi
 
     # Шаг Г: Проверяем стиль кода (Linter)
     - name: Lint with Flake8
       run: |
         # Проверяем все папки, игнорируем ошибки длины строки (E501)
+        echo "Running strict checks..."
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        echo "Running style checks with relaxed line length..."
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     # Шаг Д: Запускаем тесты
@@ -41,10 +51,11 @@ jobs:
       run: |
         # Указываем python path, чтобы тесты видели папки сервисов
         export PYTHONPATH=$PYTHONPATH:.
-        pytest
+        # Добавляем флаг -v для подробного вывода
+        python -m pytest -v
 
+    # Шаг Е: Проверяем YAML файлы
     - name: Lint YAML files
-      # Мы используем готовый Action из магазина GitHub
       uses: ibiqlik/action-yamllint@v3
       with:
         # Указываем, какие файлы проверять (все .yml и .yaml)
