@@ -1,1 +1,4 @@
-Flask Requests Flake8 pytest
+Flask
+Requests
+Flake8
+pytest
