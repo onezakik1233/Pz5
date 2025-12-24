@@ -1,0 +1,9 @@
+extends: default
+
+rules:
+  document-start: disable      # не требуем ---
+  truthy: disable              # не придираемся к on:
+  line-length: disable         # разрешаем длинные строки
+  comments: disable            # не придираемся к пробелам перед комментами
+  indentation: disable         # не валим за отступы в GH workflows
+  brackets: disable            # не валим за пробелы в []
