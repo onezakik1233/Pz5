@@ -12,7 +12,7 @@ products = [
 ]
 
 @app.route('/products', methods=['GET'])
-def get_products():
+def get_products()
     """Получить список всех товаров"""
     return jsonify(products)
 
