@@ -46,12 +46,12 @@ jobs:
           done
       - name: Create Database
         run: |
-          /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P TestPass123! -Q "CREATE DATABASE 445_SDOSus"
-          /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -d 445_SDOSus -U sa -P TestPass123! -Q "CREATE TABLE Orders (id INT PRIMARY KEY IDENTITY(1,1), product_id INT, customer_id INT, quantity INT)"
+          /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P TestPass123! -Q "CREATE DATABASE SDOSus"
+          /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -d SDOSus -U sa -P TestPass123! -Q "CREATE TABLE Orders (id INT PRIMARY KEY IDENTITY(1,1), product_id INT, customer_id INT, quantity INT)"
       - name: Run Tests
         env:
           DB_SERVER: 127.0.0.1
-          DB_DATABASE: 445_SDOSus
+          DB_DATABASE: SDOSus
           DB_USER: sa
           DB_PASSWORD: TestPass123!
         run: pytest tests/

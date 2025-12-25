@@ -5,7 +5,7 @@ from orders_service.app import app
 
 # Переменные среды для теста
 DB_SERVER = os.getenv('DB_SERVER', 'localhost')
-DB_DATABASE = os.getenv('DB_DATABASE', '445_SDOSus')
+DB_DATABASE = os.getenv('DB_DATABASE', 'SDOSus')
 DB_USER = os.getenv('DB_USER', 'sa')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'TestPass123!')
 
