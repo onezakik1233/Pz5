@@ -52,6 +52,6 @@ jobs:
         env:
           DB_SERVER: 127.0.0.1
           DB_DATABASE: SDOSus
-          DB_USER: sa
-          DB_PASSWORD: TestPass123!
+          DB_USER:
+          DB_PASSWORD:
         run: pytest tests/
